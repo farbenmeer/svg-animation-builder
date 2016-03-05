@@ -1,0 +1,6 @@
+input/
+png/
+*.png
+*.svg
+*.swp
+*.pyc
