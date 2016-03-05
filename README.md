@@ -8,7 +8,7 @@ You should have received a copy of the GNU General Public License along with thi
 # Readme
 
 svg-animation-builder takes an image folder (containing png or svg images) as input and includes the still images into a stop-motion animation svg output file.
-The program is written in Python 2.7 (visit [python.org](https://www.python.org) - there you can find instructions about how to install the python interpreter needed for running svg-animation-builder).
+It is written in Python 2.7 (visit [python.org](https://www.python.org) - there you can find instructions about how to install the python interpreter needed for running svg-animation-builder).
 
 ## Usage
 
@@ -35,8 +35,8 @@ python main.py [options]
 
 ## Limitations / Known Issues / TODO
 
-* Output SVG meta data
-* Structure of input SVGs is very limited (only reading first \<path\> of first \<g\>-Element)
+* Meta data for svg output file
+* Allowed structure for input SVGs is very limited (program is only reading first `<path\>` of first `<g\>`-Element)
 * Lots of limitations.
 
 
