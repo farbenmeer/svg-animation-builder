@@ -39,4 +39,7 @@ python main.py [options]
 * Allowed structure for input SVGs is very limited (program is only reading first `<path\>` of first `<g\>`-Element)
 * Lots of limitations.
 
+# Contact
 
+* visit [coding.fotoelectrics](http://coding.fotoelectrics.de)
+* mail to [coding@fotoelectrics](mailto:coding@fotoelectrics.de)
