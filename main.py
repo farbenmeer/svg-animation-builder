@@ -1,8 +1,8 @@
 import sys, os, re
-#import xml.etree.ElementTree
 from optparse import OptionParser
 import svg_structure, svg_structure_png
 import png_tools, svg_tools
+
 
 def setup_command_line_parser():
     cl_parser = OptionParser()
@@ -10,6 +10,7 @@ def setup_command_line_parser():
     cl_parser.add_option("-i", "--input", dest="input_folder", help="input folder", default='input/')
     cl_parser.add_option("-t", "--type", dest="file_type", help="input file type (png or svg)", default='png')
     cl_parser.add_option("-s", "--step", dest="frame_rate", help="frame rate in milliseconds", type="int", default=100)
+    cl_parser.add_option("-e", "--embed", action="store_true", dest="embed", help="embed png data in svg animation file", default=False)
     return cl_parser
 
 
@@ -61,14 +62,19 @@ def animate_png():
    
     offset = options.frame_rate 
     
+    base64 = None
     #first image
-    result += svg_structure_png.get_image(options.input_folder + pngs[0], width, height, opacity="1")
+    if options.embed:
+        base64 = png_tools.get_base64(options.input_folder + pngs[0])
+    result += svg_structure_png.get_image(options.input_folder + pngs[0], width, height, opacity="1", data=base64)
     id = 'img_' + os.path.splitext(pngs[0])[0]
     result += svg_structure_png.get_animation(id, str(offset) + 'ms', "0")
     result += svg_structure_png.get_image_close_tag()
 
     for png in pngs[1:-1]:
-        result += svg_structure_png.get_image(options.input_folder + png, width, height)
+        if options.embed:
+            base64 = png_tools.get_base64(options.input_folder + png)
+        result += svg_structure_png.get_image(options.input_folder + png, width, height, data=base64)
         id = 'img_' +  os.path.splitext(png)[0]
         result += svg_structure_png.get_animation(id, str(offset) + 'ms', "1")
         offset += options.frame_rate
@@ -76,7 +82,9 @@ def animate_png():
         result += svg_structure_png.get_image_close_tag()
    
     #last image standing 
-    result += svg_structure_png.get_image(options.input_folder + pngs[-1], width, height)
+    if options.embed:
+        base64 = png_tools.get_base64(options.input_folder + pngs[-1])
+    result += svg_structure_png.get_image(options.input_folder + pngs[-1], width, height, data=base64)
     id = 'img_' +  os.path.splitext(pngs[-1])[0]
     result += svg_structure_png.get_animation(id, str(offset) + 'ms', "1")
     result += svg_structure_png.get_image_close_tag()
@@ -85,11 +93,9 @@ def animate_png():
 
 
 def main():
-    if options.input_folder[-1] != '/':#TODO windows?
+    if options.input_folder[-1] != '/':
         options.input_folder += '/'
     
-    #result = ""
-
     if options.file_type.upper() == "SVG":
         result = animate_svg()
     elif options.file_type.upper() == "PNG":

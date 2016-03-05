@@ -20,6 +20,12 @@ def get_image_info(filename):
         f.close()
     return result
 
+def get_base64(filepath):
+    png = open(filepath, 'rb')
+    base64 = png.read().encode("base64").replace('\n', '')
+    png.close()
+    return base64
+
 #if __name__ == '__main__':
 #    with open('foo.png', 'rb') as f:
 #        data = f.read()

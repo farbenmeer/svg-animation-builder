@@ -30,8 +30,12 @@ def get_document_begin(width, height):
 def get_document_end():
     return '</g>\n</svg>'
 
-def get_image(path, width, height, opacity="0"):
-    result = '<image y="0" x="0" xlink:href="' + path + '" width="' + width + '" height="' + height + '" opacity="' + opacity + '" >\n'
+def get_image(path, width, height, opacity="0", data=None):
+    if data == None:
+        png = path
+    else:
+        png = 'data:image/png;base64,' + data
+    result = '<image y="0" x="0" xlink:href="' + png + '" width="' + width + '" height="' + height + '" opacity="' + opacity + '" >\n'
     return result
 
 def get_animation(id, offset, value="0"):
