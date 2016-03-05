@@ -1,6 +1,7 @@
 import sys, os, re
 import xml.etree.ElementTree
 import svg_structure, svg_structure_png
+import png_tools
 
 #input_dir = 'input/'
 input_dir = 'png/'
@@ -8,8 +9,8 @@ input_dir = 'png/'
 ms_per_frame = "100ms"
 ms_p_f = 100
 
-width = '1920'#TODO from png
-height = '1080'#TODO from png
+#width = '1920'#TODO from png
+#height = '1080'#TODO from png
 
 def tryint(s):
     try:
@@ -55,7 +56,12 @@ def animate_png():
     pngs = os.listdir(input_dir)
     pngs.sort(key=alphanum_key)
     
-    result = svg_structure_png.get_document_begin()
+    #take width, height from first image (all should be same size)
+    width, height = png_tools.get_image_info(input_dir + pngs[0])
+    width = str(width)
+    height = str(height)
+
+    result = svg_structure_png.get_document_begin(width, height)
    
     offset = ms_p_f 
     
