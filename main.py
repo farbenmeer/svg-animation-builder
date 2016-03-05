@@ -1,8 +1,41 @@
+# svg-animation-builder - create stop-motion animated svg from images
+# Copyright (C) 2016 Josa Wode
+#
+# This file is part of svg-animation-builder.
+#
+# svg-animation-builder is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# svg-animation-builder is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of  MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program.  If not, see <http://www.gnu.org/licenses/>.
+
 import sys, os, re
 from optparse import OptionParser
 import svg_structure, svg_structure_png
 import png_tools, svg_tools
 
+copyright_info = '''
+svg-animation-builder - create stop-motion animated svg from images
+Copyright (C) 2016 Josa Wode
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of  MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program.  If not, see <http://www.gnu.org/licenses/>.
+'''
 
 def setup_command_line_parser():
     cl_parser = OptionParser()
@@ -11,6 +44,7 @@ def setup_command_line_parser():
     cl_parser.add_option("-t", "--type", dest="file_type", help="input file type (png or svg)", default='png')
     cl_parser.add_option("-s", "--step", dest="frame_rate", help="frame rate in milliseconds", type="int", default=100)
     cl_parser.add_option("-e", "--embed", action="store_true", dest="embed", help="embed png data in svg animation file", default=False)
+    cl_parser.add_option("-c", "--copyright", action="store_true", dest="copyright_info", help="show legal information and exit", default=False)
     return cl_parser
 
 
@@ -93,6 +127,10 @@ def animate_png():
 
 
 def main():
+    if options.copyright_info:
+        print(copyright_info)
+        exit()
+
     if options.input_folder[-1] != '/':
         options.input_folder += '/'
     
@@ -108,6 +146,7 @@ def main():
     text_file = open(options.output_filename, "w")
     text_file.write(result)
     text_file.close()
+    print('stored animation in "' + options.output_filename + '"')
 
 if __name__ == "__main__":
     cl_parser = setup_command_line_parser()
