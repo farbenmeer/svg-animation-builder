@@ -7,7 +7,7 @@ You should have received a copy of the GNU General Public License along with thi
 
 # Readme
 
-svg-animation-builder takes an image folder (containing png or svg images) as input and includes the still images into a stop-motion animation svg output file.
+svg-animation-builder takes an image folder (containing png or svg images) as input and includes the still images into a stop-motion animation svg output file. Frames are ordered according to input filenames (in alphanumerical order).
 It is written in Python 2.7 (visit [python.org](https://www.python.org) - there you can find instructions about how to install the python interpreter needed for running svg-animation-builder).
 
 ## Usage
