@@ -1,6 +1,6 @@
 input/
 png/
-*.png
-*.svg
-*.swp
-*.pyc
+*.png*
+*.svg*
+*.swp*
+*.pyc*

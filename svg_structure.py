@@ -27,8 +27,8 @@ def get_document_begin(width, height):
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
-   width="''' + width + '''px"
-   height="''' + height + '''px"
+   width="''' + str(width) + '''px"
+   height="''' + str(height) + '''px"
    version="1.1">
   <metadata>
     <rdf:RDF>
@@ -47,11 +47,12 @@ def get_document_begin(width, height):
 def get_document_end():
     return '</path>\n  </g>\n</svg>'
 
-def get_path(path):
-    return '''    <path
-       style="fill:#000000"
-       d="''' + path + '''" >
-'''
+def get_path(path, wratio=1.0, hratio=1.0):
+    result = '<path style="fill:#000000" '
+    if wratio != 1.0 and hratio != 1.0:
+        result += 'transform="scale(' + str(wratio) + ',' + str(hratio) + ')" \n'
+    result += 'd="' + path + '" >\n'
+    return result
 
 def get_animation(name, duration, path, offset=None):
     result = '<animate id="img_' + name + '" attributeName="d" fill="freeze" dur="' + duration + '" '

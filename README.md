@@ -15,16 +15,20 @@ It is written in Python 2.7 (visit [python.org](https://www.python.org) - there 
 python main.py [options]
 
 ### Options
-*  -o OUTPUT\_FILENAME, --output=OUTPUT\_FILENAME
+*  -h, --help            show this help message and exit
+*  -f OUTPUT\_FILENAME, --file=OUTPUT\_FILENAME
                         define output file (default: animation.svg)
 *  -i INPUT\_FOLDER, --input=INPUT\_FOLDER
                         input folder (default: input/)
+*  -o OUTPUT\_FOLDER, --output=OUTPUT\_FOLDER
+                        output folder for png images (default: output/)
 *  -t FILE\_TYPE, --type=FILE\_TYPE
                         input file type (png or svg) (default: png)
 *  -s FRAME\_RATE, --step=FRAME\_RATE
                         frame rate in milliseconds (default: 100)
+*  --width=WIDTH         scale images to the given width (ommit --height for aspect ratio)
+*  --height=HEIGHT       scale images to the given height (ommit --width for aspect ratio)
 *  -e, --embed           embed png data in svg animation file
-*  -h, --help            show help message and exit
 *  -c, --copyright       show legal information and exit
 
 ### Examples
@@ -32,6 +36,7 @@ python main.py [options]
 * python main.py
 * python main.py --step=60 --output=fast-animation.svg
 * python main.py -i svg-folder --type=svg 
+* python main.py --width 1024
 
 ## Limitations / Known Issues / TODO
 
