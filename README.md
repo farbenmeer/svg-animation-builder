@@ -46,5 +46,5 @@ python main.py [options]
 
 # Contact
 
-* visit [coding.fotoelectrics](http://coding.fotoelectrics.de)
-* mail to [coding@fotoelectrics](mailto:coding@fotoelectrics.de)
+* visit [coding.josawode](https://coding.josawode.de)
+* mail to [coding@josawode](mailto:coding@josawode.de)
