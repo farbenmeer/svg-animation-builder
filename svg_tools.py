@@ -28,7 +28,7 @@ def extract_image_info(filepath, required_width, required_height):
     e = xml.etree.ElementTree.parse(filepath).getroot()
     width = e.get('width')
     height = e.get('height')
-    
+
     #convert attribute to float
     if width.endswith('px'):
         width = width[:-2]
@@ -36,15 +36,15 @@ def extract_image_info(filepath, required_width, required_height):
     if height.endswith('px'):
         height = height[:-2]
     height = float(height)
-    
+
     if required_width == required_height == None:
         return (int(width), int(height), 1.0, 1.0)
-    
+
     if required_width != None and required_height != None:
         wratio = float(required_width)/float(width)
         hratio = float(required_height)/float(height)
         return (required_width, required_height, wratio, hratio)
-    
+
     if required_width == None:
         ratio = float(required_height)/height
     else: #if required_height == None:
@@ -56,5 +56,3 @@ def extract_image_info(filepath, required_width, required_height):
     height = int(round(height))
 
     return (width, height, ratio, ratio)
-
-
